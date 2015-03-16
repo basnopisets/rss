@@ -1,4 +1,4 @@
-package oleg.osipenko.lentarssreader.network;
+package oleg.osipenko.lentarssreader.rss_model;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

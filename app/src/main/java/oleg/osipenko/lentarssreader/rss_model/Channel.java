@@ -1,9 +1,11 @@
-package oleg.osipenko.lentarssreader.network;
+package oleg.osipenko.lentarssreader.rss_model;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.List;
+
+import oleg.osipenko.lentarssreader.rss_model.Item;
 
 /**
  * Created by basnopisets on 15.03.15.

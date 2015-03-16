@@ -1,7 +1,8 @@
 package oleg.osipenko.lentarssreader.network;
 
-import retrofit.Callback;
+import oleg.osipenko.lentarssreader.rss_model.Rss;
 import retrofit.http.GET;
+import rx.Observable;
 
 /**
  * Created by basnopisets on 16.03.15.
@@ -9,5 +10,5 @@ import retrofit.http.GET;
 public interface GazetaRssService {
 
     @GET("/export/rss/lenta.xml")
-    void getGazetaItems(Callback<Rss> cb);
+    Observable<Rss> getGazetaItems();
 }
