@@ -28,6 +28,8 @@ public class Item {
     @Element(required = false)
     Enclosure enclosure;
 
+    boolean expanded;
+
     public String getTitle() {
         return title;
     }
@@ -41,7 +43,15 @@ public class Item {
     }
 
     public String getImageUrl() {
-        return this.enclosure.getUrl();
+        if (null != this.getEnclosure()) {
+            return this.getEnclosure().getUrl();
+        } else {
+            return "";
+        }
+    }
+
+    public Enclosure getEnclosure() {
+        return enclosure;
     }
 
     public String getSource() {
@@ -63,13 +73,23 @@ public class Item {
         return date;
     }
 
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 ", title='" + title + '\'' +
                 ", link='" + link + '\'' +
                 ", description='" + description + '\'' +
-                ", pubDate='" + pubDate + '\'' +
+                ", pubDate='" + getDate() + '\'' +
+                ", source='" + getSource() + '\'' +
+                ", expanded='" + expanded + '\'' +
                 '}';
     }
 
