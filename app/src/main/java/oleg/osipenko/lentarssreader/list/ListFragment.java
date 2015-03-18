@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by basnopisets on 17.03.15.
  */
-public class ListFragment extends Fragment implements RssAdapter.ItemClickListener {
+public class ListFragment extends Fragment {
 
 
     @InjectView(R.id.recyclerview)
@@ -46,8 +47,9 @@ public class ListFragment extends Fragment implements RssAdapter.ItemClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         mFeedItems = new TreeMap<>(Collections.reverseOrder());
-        mAdapter = new RssAdapter(this);
+        mAdapter = new RssAdapter();
 
         RestAdapter lentaAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://lenta.ru")
@@ -69,7 +71,6 @@ public class ListFragment extends Fragment implements RssAdapter.ItemClickListen
                 .subscribe(new Subscriber<Rss>() {
                     @Override
                     public void onCompleted() {
-                        Log.d(MainActivity.LOG_TAG, "completed " + mFeedItems.size());
                         mAdapter.putValues(mFeedItems);
                     }
 
@@ -80,7 +81,6 @@ public class ListFragment extends Fragment implements RssAdapter.ItemClickListen
 
                     @Override
                     public void onNext(Rss rss) {
-                        Log.d(MainActivity.LOG_TAG, "on next");
                         Stream.of(rss.getChannel().getItem())
                                 .forEach(item -> {
                                     mFeedItems.put(item.getDate(), item);
@@ -94,17 +94,11 @@ public class ListFragment extends Fragment implements RssAdapter.ItemClickListen
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(getResources()
+                .getInteger(R.integer.num_of_columns), StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
         return view;
-    }
-
-    @Override
-    public void itemClicked(int position) {
-        Log.d(MainActivity.LOG_TAG, "clicked item " + position);
     }
 }
