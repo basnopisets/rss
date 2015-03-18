@@ -45,8 +45,13 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> {
         holder.mTvDescription.setText(item.getDescription());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
             holder.mIvFeed.setVisibility(View.VISIBLE);
+            int size = Math.round(holder.getContext().getResources().getDisplayMetrics()
+                    .widthPixels / holder.getContext().getResources().getDisplayMetrics().density
+                    / holder.getContext().getResources().getInteger(R.integer.num_of_columns));
             Picasso.with(holder.getContext())
                     .load(item.getImageUrl())
+                    .resize(size, size)
+                    .centerCrop()
                     .into(holder.mIvFeed);
         } else {
             holder.mIvFeed.setImageResource(0);
