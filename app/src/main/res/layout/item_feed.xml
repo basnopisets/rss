@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="4dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Caption"
+        tools:text="gazeta.ru"
+        android:autoLink="web"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_feed"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/test_image"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            android:alpha="0.6"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Париж сделал своей почетной гражданкой смертницу из Пакистана"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:alpha="0.6"
+        tools:text="По предложению мэра Парижа Анн Идальго городской совет дал звание почетного гражданина города жительнице Пакистана Асии Биби. Женщина-христианка приговорена к смертной казни за оскорбление Аллаха. Мэр потребовала освободить узницу и готова поселить ее во французской столице"
+        android:visibility="gone"/>
+
+</LinearLayout>
