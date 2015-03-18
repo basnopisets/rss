@@ -22,6 +22,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -31,10 +35,13 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.jakewharton:butterknife:5.1.1'
-    provided 'com.squareup.retrofit:converter-simplexml:1.9.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.retrofit:retrofit-converters:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.netflix.rxjava:rxjava-android:0.20.7'
+    compile('com.squareup.retrofit:converter-simplexml:1.9.0') {
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'xpp3', module: 'xpp3'
+    }
 }
