@@ -82,9 +82,7 @@ public class ListFragment extends Fragment {
                     @Override
                     public void onNext(Rss rss) {
                         Stream.of(rss.getChannel().getItem())
-                                .forEach(item -> {
-                                    mFeedItems.put(item.getDate(), item);
-                                });
+                                .forEach(item -> mFeedItems.put(item.getDate(), item));
                     }
                 });
     }
